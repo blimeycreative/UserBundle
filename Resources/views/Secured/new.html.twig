@@ -1,5 +1,5 @@
 {% extends 'OxygenUserBundle::layout.html.twig' %}
 {% form_theme form "OxygenUserBundle:Theme:form.html.twig" %}
 {% block body %}
-  {% include 'OxygenUserBundle:Admin:form.html.twig' with {'form':form, 'form_route':path('new_user'), 'new_user':true } %}
+  {% include 'OxygenUserBundle:Secured:form.html.twig' with {'form':form, 'form_route':path('new_user'), 'new_user':true } %}
 {% endblock %}
