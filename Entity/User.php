@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Oxygen\UserBundle\Entity\User
  *
- * @ORM\Table(name="user")
+ * @ORM\MappedSuperclass
  * @ORM\Entity(repositoryClass="Oxygen\UserBundle\Entity\UserRepository")
  * @UniqueEntity(fields="email", message="The email you entered already has an account")
  * @ORM\HasLifecycleCallbacks()
