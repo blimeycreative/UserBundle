@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Oxygen\UserBundle\Entity\Role
- * @ORM\MappedSuperclass
+ *
+ * @ORM\Table(name="role")
+ * @ORM\Entity(repositoryClass="Oxygen\UserBundle\Entity\RoleRepository")
  */
 class Role implements RoleInterface {
 
