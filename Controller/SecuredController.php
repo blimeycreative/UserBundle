@@ -68,22 +68,13 @@ class SecuredController extends Controller {
    */
   public function indexAction() {
     $query = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->createQueryBuilder('u');
-    $paginate = false;
-    if ($this->container->has('oxygen_paginate')){
-      $query = $this->container->get('oxygen_paginate')
-              ->paginate($query, 2, 'u')
-              ->getResults('users');
-      $paginate = true;
-    }
-    else
-      $query = $query->getQuery();
+    $query = $query->getQuery();
     $users = $query->getResult();
     foreach ($users as $user)
       $user->setDeleteForm($this->createDeleteForm($user->getId())->createView());
 
     return array(
         'users' => $users,
-        'paginate' => $paginate
     );
   }
 
