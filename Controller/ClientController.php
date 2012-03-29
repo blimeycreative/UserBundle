@@ -111,6 +111,8 @@ class ClientController extends Controller {
     if ($form->isValid()) {
       $data = $form->getData();
       $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->findOneBy(array('email' => $data['email']));
+      if (!$user)
+        throw $this->createNotFoundException('User account not found');
       $message = \Swift_Message::newInstance()
               ->setSubject('Forgotten Password')
               ->setTo($user->getEmail())
@@ -132,7 +134,6 @@ class ClientController extends Controller {
     $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->findOneBy(array('id' => $id, 'token' => $token));
     if (!$user)
       throw $this->createNotFoundException('User account not found');
-
     $form = $this->createForm(new ResetPasswordType());
     $request = $this->getRequest();
     $form->bindRequest($request);

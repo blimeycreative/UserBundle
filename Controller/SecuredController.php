@@ -17,7 +17,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/new", name="new_user")
-   * @Template
+   * @Template("OxygenUserBundle:Secured:new")
    */
   public function newAction() {
     $user = new User();
@@ -29,7 +29,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/edit/{id}", name="edit_user")
-   * @Template
+   * @Template("OxygenUserBundle:Secured:edit")
    */
   public function editAction($id) {
     $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->find($id);
@@ -46,7 +46,6 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/delete/{id}", name="delete_user")
-   * @Template
    */
   public function deleteAction($id) {
     $em = $this->getDoctrine()->getEntityManager();
@@ -65,7 +64,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/{page}", name="show_users", defaults={"page" = 1})
-   * @Template
+   * @Template("OxygenUserBundle:Secured:index")
    */
   public function indexAction() {
     $query = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->createQueryBuilder('u');
