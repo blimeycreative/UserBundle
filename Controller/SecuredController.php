@@ -11,9 +11,9 @@ use Oxygen\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * @Route("/admin/user")
+ * @Route("/secured/user")
  */
-class AdminController extends Controller {
+class SecuredController extends Controller {
 
   /**
    * @Route("/new", name="new_user")

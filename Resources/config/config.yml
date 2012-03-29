@@ -1,2 +1,3 @@
 parameters:
   security.firewall.name: "secured_area"
+  oxygen.userbundle.from.email: test@test.com
