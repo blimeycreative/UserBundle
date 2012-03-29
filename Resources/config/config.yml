@@ -1,0 +1,2 @@
+parameters:
+  security.firewall.name: "secured_area"

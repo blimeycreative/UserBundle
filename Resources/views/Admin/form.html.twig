@@ -1,0 +1,6 @@
+<form action="{{ form_route }}" method="post" {{ form_enctype(form) }}>
+  <div id="user-form">
+    {{ form_widget(form) }}
+    <input type="submit" value="Save user" class="submit" />
+  </div>
+</form>

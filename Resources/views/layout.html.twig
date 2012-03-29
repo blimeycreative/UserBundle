@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+{% stylesheets 
+  "@OxygenUserBundle/Resources/public/css/*" 
+  output="/css/security.css"
+%}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css">
+{% endstylesheets %}
+{% endblock %}

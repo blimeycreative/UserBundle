@@ -1,0 +1,39 @@
+/* 
+    Document   : security
+    Created on : Jan 6, 2012, 1:07:39 PM
+    Author     : luke
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div#user-form {
+  width: 350px;
+}
+div#user-form input, div#user-form select, div#user-form textarea, div#user-form label{
+  display: block; 
+  float: left;
+  margin: 5px 0 0 0;
+  padding: 2px;
+}
+div#user-form input, div#user-form textarea{
+  width: 200px;
+}
+div#user-form textarea{
+  height: 70px;
+}
+div#user-form label{
+  clear: both;
+  width: 110px;
+}
+div#user-form input.user-form-send{
+  clear: both;
+  width: 100px;
+}
+div#user-form div.user-form-error input, div#user-form div.user-form-error select, div#user-form div.user-form-error textarea{
+  border: solid 2px #AA3333;
+  background: #FFDDEE;
+}
+div#user-form span.required{
+  color: #BB0000;
+}
+

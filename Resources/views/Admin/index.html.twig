@@ -1,0 +1,34 @@
+{% extends 'OxygenUserBundle::layout.html.twig' %}
+{% block body %}
+<h1>Manage users</h1>
+<ul>
+  <li><a href="{{ path("new_user") }}">Create</a></li>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Username</th><th>Roles</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+    <tr class="row_{{ user.username }}">
+      <td>
+        {{ user.username }}
+      </td>
+      <td>
+        {{ user.roles|join(', ')}}
+      </td>
+      <td class="actions_{{ user.username }}">
+        <a href="{{ path('edit_user', {'id':user.id}) }}">Edit</a>,
+        <form action="{{ path('delete_user', {'id':user.id}) }}">
+          {{ form_widget(user.deleteForm) }}
+          <input type="submit" value="delete" />
+        </form>
+      </td> 
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{{ pagination('users')|raw }}
+{% endblock %}

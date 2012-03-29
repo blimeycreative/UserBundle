@@ -1,0 +1,9 @@
+{% form_theme form "OxygenUserBundle:Theme:login.html.twig" %}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('_login_check') }}" method="post">
+  {{ form_widget(form) }}
+  <input type="submit" value="login" name="login" />
+</form>

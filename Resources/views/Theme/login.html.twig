@@ -1,0 +1,5 @@
+{% extends 'form_div_layout.html.twig' %}
+{% block widget_attributes %}
+  {% set full_name = name %}
+  {{ parent() }}
+{% endblock widget_attributes %}

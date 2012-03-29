@@ -1,0 +1,40 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget %}
+{% spaceless %}
+  {{ block('field_rows') }}
+  {{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget %}
+
+{% block field_rows %}
+{% spaceless %}
+    {% for child in form %}
+        {{ form_errors(child) }}
+    {% endfor %}
+    {% for child in form %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock field_rows %}
+
+{% block field_row %}
+  <div {% if form_errors(form)|length > 0 %}class="user-form-error"{% endif %}>
+    {{ form_label(form) }}     
+    {{ form_widget(form) }}
+  </div>
+{% endblock %}
+
+{% block generic_label %}
+  {% spaceless %}
+    {% if required %}
+      {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
+    {% endif %}
+    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+      {{ label|trans }}
+      {% if required %}
+        <span class="required">*</span>
+      {% endif %}
+    </label>
+  {% endspaceless %}
+{% endblock %}
