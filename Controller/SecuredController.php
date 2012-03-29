@@ -17,7 +17,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/new", name="new_user")
-   * @Template("OxygenUserBundle:Secured:new")
+   * @Template("OxygenUserBundle:Secured:new.html.twig")
    */
   public function newAction() {
     $user = new User();
@@ -29,7 +29,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/edit/{id}", name="edit_user")
-   * @Template("OxygenUserBundle:Secured:edit")
+   * @Template("OxygenUserBundle:Secured:edit.html.twig")
    */
   public function editAction($id) {
     $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->find($id);
@@ -64,7 +64,7 @@ class SecuredController extends Controller {
 
   /**
    * @Route("/{page}", name="show_users", defaults={"page" = 1})
-   * @Template("OxygenUserBundle:Secured:index")
+   * @Template("OxygenUserBundle:Secured:index.html.twig")
    */
   public function indexAction() {
     $query = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->createQueryBuilder('u');
