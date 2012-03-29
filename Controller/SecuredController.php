@@ -68,10 +68,13 @@ class SecuredController extends Controller {
    */
   public function indexAction() {
     $query = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->createQueryBuilder('u');
-    if ($this->container->has('oxygen_paginate'))
+    $paginate = false;
+    if ($this->container->has('oxygen_paginate')){
       $query = $this->container->get('oxygen_paginate')
               ->paginate($query, 2, 'u')
               ->getResults('users');
+      $paginate = true;
+    }
     else
       $query = $query->getQuery();
     $users = $query->getResult();
@@ -80,6 +83,7 @@ class SecuredController extends Controller {
 
     return array(
         'users' => $users,
+        'paginate' => $paginate
     );
   }
 
