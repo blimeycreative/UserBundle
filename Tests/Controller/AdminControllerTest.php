@@ -30,14 +30,14 @@ class AdminControllerTest extends WebTestCase
 
         return $client;
     }
-
+        
     public function testUserManagement()
     {
         echo "\n\n ===START USER TEST===\n\n";
-
+        
         $client = $this->getAuthenticatedUser();
         echo "User test: Spoof login: Pass\n";
-
+        
         $crawler = $client->request('GET', '/admin/user');
         $this->assertTrue(200 == $client->getResponse()->getStatusCode(), 'User index page does not exist');
         echo "User test: Page exists: 200 status - Pass\n";
@@ -48,10 +48,10 @@ class AdminControllerTest extends WebTestCase
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();
-        $this->assertTrue(is_object($role), 'Role is not a doctrine object');
-        $this->assertTrue(method_exists($role, 'getId'), 'Role does not have getId method');
+        $this->assertTrue(is_object($role),'Role is not a doctrine object');
+        $this->assertTrue(method_exists($role,'getId'),'Role does not have getId method');
         echo "User test: Get role object: {$role->getRole()} - Pass\n";
-
+        
         $crawler = $client->click($crawler->selectLink('Create')->link());
         $form = $crawler->selectButton('Save user')->form();
         $form['user[username]'] = 'Functional test User';
@@ -62,7 +62,7 @@ class AdminControllerTest extends WebTestCase
         $crawler = $client->submit($form);
         $this->assertRegExp('/You must provide a valid email address/', $client->getResponse()->getContent(), 'Error message for fake email not displaying');
         echo "User test: False email validation: Pass\n";
-
+        
         $client->submit($crawler->selectButton('Save user')->form(), array(
             'user[password]' => 'test',
             'user[email]' => 'Functional@test.com',
@@ -71,6 +71,9 @@ class AdminControllerTest extends WebTestCase
         $row = $crawler->filter('tr:contains("Functional test User")');
         $this->assertTrue($row->count() == 1, 'Test user name cannot be found, likely entity failure');
         echo "User test: Enitity creation: Pass\n";
+
+        $this->assertTrue($row->filter('td:contains("'.$role->getName().'")')->count() == 1, 'Test role cannot be found');
+        echo "User test: Correct Role: Associated - Pass\n";
 
         $crawler = $client->click($row->selectLink('Edit')->link());
         $form = $crawler->selectButton('Save user')->form();
