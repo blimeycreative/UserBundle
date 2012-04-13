@@ -63,7 +63,7 @@ class SecuredController extends Controller {
   }
 
   /**
-   * @Route("/{page}", name="show_users", defaults={"page" = 1})
+   * @Route("/", name="show_users")
    * @Template("OxygenUserBundle:Secured:index.html.twig")
    */
   public function indexAction() {
