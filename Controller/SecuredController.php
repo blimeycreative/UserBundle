@@ -102,7 +102,7 @@ class SecuredController extends Controller {
     return false;
   }
 
-  private function createDeleteForm($id) {
+  protected function createDeleteForm($id) {
     return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
   }
 
