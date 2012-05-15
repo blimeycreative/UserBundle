@@ -75,7 +75,7 @@ class User implements AdvancedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
      */
-    private $user_roles;
+    private $roles;
     private $delete_form;
 
     /**
@@ -92,7 +92,7 @@ class User implements AdvancedUserInterface
     {
         $this->salt = $this->random();
         $this->token = $this->random();
-        $this->user_roles = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function random()
@@ -232,17 +232,12 @@ class User implements AdvancedUserInterface
 
     public function getRoles()
     {
-        return $this->user_roles->toArray();
-    }
-
-    public function getUserRoles()
-    {
-        return $this->user_roles;
+        return $this->roles->toArray();
     }
     
     public function getRoleObjects()
     {
-        return $this->user_roles;
+        return $this->roles;
     }
 
     public function eraseCredentials()
@@ -262,7 +257,7 @@ class User implements AdvancedUserInterface
      */
     public function addRole(Role $role)
     {
-        $this->user_roles[] = $role;
+        $this->roles[] = $role;
     }
 
     /**
@@ -272,7 +267,7 @@ class User implements AdvancedUserInterface
      */
     public function setRoles($roles)
     {
-        $this->user_roles = $roles;
+        $this->roles = $roles;
     }
 
     public function setDeleteForm($form)
