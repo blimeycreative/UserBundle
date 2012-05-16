@@ -230,15 +230,6 @@ class User implements AdvancedUserInterface
         return $this->active;
     }
 
-    public function getRoles()
-    {
-        return $this->roles->toArray();
-    }
-    
-    public function getRoleObjects()
-    {
-        return $this->roles;
-    }
 
     public function eraseCredentials()
     {
@@ -250,6 +241,20 @@ class User implements AdvancedUserInterface
         return $this->username === $user->getUsername() || $this->email === $user->getEmail();
     }
 
+    
+    public function getRoles()
+    {
+        $backtrace = debug_backtrace();
+        if($backtrace[2]['class'] == "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager")
+            return $this->roles->toArray();
+        return $this->roles;
+    }
+    
+    
+    public function getRoleObjects()
+    {
+        return $this->roles;
+    }
     /**
      * Add roles
      *
