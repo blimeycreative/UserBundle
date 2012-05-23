@@ -1,5 +1,5 @@
 <?php
-
+/* Example user fixture
 namespace Oxygen\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -35,3 +35,4 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface{
     return 2;
   }
 }
+*/
