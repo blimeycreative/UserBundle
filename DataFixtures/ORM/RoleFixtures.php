@@ -1,5 +1,5 @@
 <?php
-
+/* Example role fixtures
 namespace Oxygen\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -29,3 +29,4 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface{
     return 1;
   }
 }
+*/
