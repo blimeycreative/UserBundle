@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email", message="The email you entered already has an account")
  * @ORM\HasLifecycleCallbacks()
  */
-class User implements AdvancedUserInterface
+class User implements AdvancedUserInterface, \Serializable
 {
 
     /**
@@ -230,7 +230,6 @@ class User implements AdvancedUserInterface
         return $this->active;
     }
 
-
     public function eraseCredentials()
     {
         
@@ -241,20 +240,19 @@ class User implements AdvancedUserInterface
         return $this->username === $user->getUsername() || $this->email === $user->getEmail();
     }
 
-    
     public function getRoles()
     {
         $backtrace = debug_backtrace();
-        if($backtrace[2]['class'] == "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager")
+        if ($backtrace[2]['class'] == "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager")
             return $this->roles->toArray();
         return $this->roles;
     }
-    
-    
+
     public function getRoleObjects()
     {
         return $this->roles;
     }
+
     /**
      * Add roles
      *
@@ -367,6 +365,26 @@ class User implements AdvancedUserInterface
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+                $this->id,
+                $this->password,
+                $this->username,
+                $this->roles
+            ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->password,
+            $this->username,
+            $this->roles
+            ) = unserialize($serialized);
     }
 
 }
