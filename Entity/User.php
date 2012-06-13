@@ -29,40 +29,40 @@ class User implements AdvancedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $username
      * @Assert\NotBlank()
      * @ORM\Column(name="username", type="string", length=255)
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string $salt
      * 
      * @ORM\Column(name="salt", type="string", length=40)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string $password
      * @Assert\NotNull(message="You must enter a password")
      * @ORM\Column(name="password", type="string", length=255)
      */
-    private $password;
+    protected $password;
 
     /**
      * @var string $active
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active;
+    protected $active;
 
     /**
      * @var string $token
      * @ORM\Column(name="token", type="string", length="255")
      */
-    private $token;
+    protected $token;
 
     /**
      * @var string $email
@@ -70,23 +70,23 @@ class User implements AdvancedUserInterface
      * @Assert\NotNull(message="You must provide a valid email address")
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
-    private $email;
+    protected $email;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Oxygen\UserBundle\Entity\Role", inversedBy="users")
      */
-    private $roles;
-    private $delete_form;
+    protected $roles;
+    protected $delete_form;
 
     /**
      * @ORM\Column(name="created", type="datetime");
      */
-    private $created;
+    protected $created;
 
     /**
      * @ORM\Column(name="updated", type="datetime");
      */
-    private $updated;
+    protected $updated;
 
     public function __construct()
     {

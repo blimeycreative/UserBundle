@@ -22,26 +22,26 @@ class Role implements RoleInterface {
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  private $id;
+  protected $id;
 
   /**
    * @var string $name
    *
    * @ORM\Column(name="name", type="string", length=255)
    */
-  private $name;
+  protected $name;
 
   /**
    * @var string $role
    *
    * @ORM\Column(name="role", type="string", length=255, unique=true)
    */
-  private $role;
+  protected $role;
 
   /**
    * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
    */
-  private $users;
+  protected $users;
 
   public function __construct() {
     $this->users = new ArrayCollection();
