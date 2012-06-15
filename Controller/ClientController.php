@@ -117,7 +117,7 @@ class ClientController extends Controller {
               ->setSubject('Forgotten Password')
               ->setTo($user->getEmail())
               ->setFrom($this->container->getParameter('oxygen.userbundle.from.email'))
-              ->setBody($this->renderView($this->container->getParameter('oxygen.userextensionbundle.name').':Email:forgotten_password.html.twig', array('user' => $user)), 'text/html');
+              ->setBody($this->renderView('OxygenUserBundle:Email:forgotten_password.html.twig', array('user' => $user)), 'text/html');
       $this->get('mailer')->send($message);
       $this->get('session')->setFlash('notice', 'Thank you, you must now confirm your account');
       $message = $this->getMessage("An email has been sent to your account to start the password reset procedure.  Please click the link sent to continue.");
