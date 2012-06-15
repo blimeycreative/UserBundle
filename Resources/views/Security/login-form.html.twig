@@ -5,7 +5,7 @@
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
-<form action="{{ path('_login_check') }}" method="post">
+<form action="{{ path('_login_check') }}" method="post" class="login">
   {{ form_widget(form) }}
   <input type="submit" value="login" name="login" />
 </form> 
