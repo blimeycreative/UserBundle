@@ -32,7 +32,7 @@ class SecuredController extends Controller {
    * @Template("OxygenUserBundle:Secured:edit.html.twig")
    */
   public function editAction($id) {
-    $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->find($id);
+    $user = $this->getDoctrine()->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')->find($id);
     if (!$user)
       throw $this->createNotFoundException('Sorry user not found');
     $form = $this->createForm(new UserType('admin', 'edit'), $user);
@@ -49,7 +49,7 @@ class SecuredController extends Controller {
    */
   public function deleteAction($id) {
     $em = $this->getDoctrine()->getEntityManager();
-    $user = $em->getRepository('OxygenUserBundle:User')->find($this->getRequest()->get('id'));
+    $user = $em->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')->find($this->getRequest()->get('id'));
     if (!$user)
       throw $this->createNotFoundException('Sorry user not found');
     $form = $this->createDeleteForm($this->getRequest()->get('id'));
@@ -67,7 +67,7 @@ class SecuredController extends Controller {
    * @Template("OxygenUserBundle:Secured:index.html.twig")
    */
   public function indexAction() {
-    $query = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->createQueryBuilder('u');
+    $query = $this->getDoctrine()->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')->createQueryBuilder('u');
     $query = $query->getQuery();
     $users = $query->getResult();
     foreach ($users as $user)

@@ -30,7 +30,7 @@ class ClientController extends Controller {
     if ($this->getRequest()->getMethod() == 'POST') {
       $form->bindRequest($this->getRequest());
       if ($form->isValid()) {
-        $role = $this->getDoctrine()->getRepository('OxygenUserBundle:Role')->findOneByRole('ROLE_USER');
+        $role = $this->getDoctrine()->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':Role')->findOneByRole('ROLE_USER');
         $user->setActive(0);
         $user->addRole($role);
         $password = $this->encodePassword($user);
@@ -42,7 +42,7 @@ class ClientController extends Controller {
                 ->setSubject('Account confirmation')
                 ->setTo($user->getEmail())
                 ->setFrom($this->container->getParameter('oxygen.userbundle.from.email'))
-                ->setBody($this->renderView('OxygenUserBundle:Email:register.html.twig', array('user' => $user)), 'text/html');
+                ->setBody($this->renderView($this->container->getParameter('oxygen.userextensionbundle.name').':Email:register.html.twig', array('user' => $user)), 'text/html');
         $this->get('mailer')->send($message);
         $this->get('session')->setFlash('notice', 'Thank you, you must now confirm your account');
         $message = $this->getMessage("Thank you for registering for an account, and email has been sent to your account with a link.  Please click the link to confirm your account.");
@@ -63,7 +63,7 @@ class ClientController extends Controller {
    * @Template
    */
   public function getMessage($message) {
-    return $this->render('OxygenUserBundle:Client:thankyou.html.twig', array(
+    return $this->render($this->container->getParameter('oxygen.userextensionbundle.name').':Client:thankyou.html.twig', array(
                 'message' => $message
             ));
   }
@@ -74,7 +74,7 @@ class ClientController extends Controller {
    */
   public function confirmAction($id, $token) {
     $user = $this->getDoctrine()
-            ->getRepository('OxygenUserBundle:User')
+            ->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')
             ->findOneBy(array('id' => $id, 'token' => $token));
     if (!$user)
       throw $this->createNotFoundException("Sorry this request is not valid, if you followed an email link please contact the site administrator");
@@ -110,14 +110,14 @@ class ClientController extends Controller {
     $form->bindRequest($request);
     if ($form->isValid()) {
       $data = $form->getData();
-      $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->findOneBy(array('email' => $data['email']));
+      $user = $this->getDoctrine()->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')->findOneBy(array('email' => $data['email']));
       if (!$user)
         throw $this->createNotFoundException('User account not found');
       $message = \Swift_Message::newInstance()
               ->setSubject('Forgotten Password')
               ->setTo($user->getEmail())
               ->setFrom($this->container->getParameter('oxygen.userbundle.from.email'))
-              ->setBody($this->renderView('OxygenUserBundle:Email:forgotten_password.html.twig', array('user' => $user)), 'text/html');
+              ->setBody($this->renderView($this->container->getParameter('oxygen.userextensionbundle.name').':Email:forgotten_password.html.twig', array('user' => $user)), 'text/html');
       $this->get('mailer')->send($message);
       $this->get('session')->setFlash('notice', 'Thank you, you must now confirm your account');
       $message = $this->getMessage("An email has been sent to your account to start the password reset procedure.  Please click the link sent to continue.");
@@ -131,7 +131,7 @@ class ClientController extends Controller {
    * @Template
    */
   public function resetPasswordAction($id, $token) {
-    $user = $this->getDoctrine()->getRepository('OxygenUserBundle:User')->findOneBy(array('id' => $id, 'token' => $token));
+    $user = $this->getDoctrine()->getRepository($this->container->getParameter('oxygen.userextensionbundle.name').':User')->findOneBy(array('id' => $id, 'token' => $token));
     if (!$user)
       throw $this->createNotFoundException('User account not found');
     $form = $this->createForm(new ResetPasswordType());
