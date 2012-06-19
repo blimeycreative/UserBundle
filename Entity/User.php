@@ -8,8 +8,6 @@ use Oxygen\UserBundle\Entity\Role;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**

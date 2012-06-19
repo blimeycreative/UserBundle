@@ -20,7 +20,8 @@ class SecuredController extends Controller {
    * @Template("OxygenUserBundle:Secured:new.html.twig")
    */
   public function newAction() {
-    $user = new User();
+    $userclass = $this->container->getParameter('oxygen.userextensionbundle.namespace');
+    $user = new $userclass;
     $form = $this->createForm(new UserType('admin', 'new'), $user);
     if ($this->processForm($form, $user, true))
       return new RedirectResponse($this->generateUrl('show_users'));
