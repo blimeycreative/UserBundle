@@ -58,7 +58,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var string $token
-     * @ORM\Column(name="token", type="string", length="255")
+     * @ORM\Column(name="token", type="string", length=255)
      */
     protected $token;
 
