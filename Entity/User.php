@@ -241,9 +241,19 @@ class User implements AdvancedUserInterface, \Serializable
     public function getRoles()
     {
         $backtrace = debug_backtrace();
-        if (isset($backtrace[2], $backtrace[2]['class']) && $backtrace[2]['class'] == "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager"){
+        if (isset($backtrace[2], $backtrace[2]['class'])
+            && in_array(
+                $backtrace[2]['class'],
+                array(
+                     "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager",
+                     "Symfony\Component\Security\Http\RememberMe\AbstractRememberMeServices",
+                     "Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider"
+                )
+            )
+        ) {
             return $this->roles->toArray();
         }
+
         return $this->roles;
     }
 
